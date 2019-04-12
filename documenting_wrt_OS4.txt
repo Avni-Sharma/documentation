@@ -1,0 +1,42 @@
+STEPS TO LOGIN TO OC WITH A USER1 GROUP 
+
+User1 is a group that has been created by the kubeadmin. This group will have
+certain roles to be associated with it. We need to bind the roles with the
+suitable group to achieve the desired result of logging in as user1and not
+kubeadmin.
+
+Firstly
+export KUBECONFIG=~/.kubeconfig
+
+login to OS4 using kubeadmin as the user login 
+`oc login -u kubeadmin -p ***`
+
+From the UI:
+Go to Administration -> Cluster Settings -> Global Configuration -> OAuth ->
+Identity Providers -> Add HTPasswd  (Upload a password file under this
+subsection. That would be the password for user1 login group)
+You can change the name of the group in the YAML.
+
+htpasswd -c users.htpasswd user1
+
+oc create clusterrolebinding basic-user --clusterrole=basic-user --user=user1
+
+--------------------------------------------------------------------------------
+
+Now you can login as a -u user1 with -p <password file>
+
+After this create a role or edit the yaml in the existing basic-user role with
+the following yaml 
+
+  - verbs:
+      - get
+      - list
+    apiGroups:
+      - operators.coreos.com
+    resources:
+      - clusterserviceversions
+
+and save it. 
+Now you can login as user1 and run `oc get csvs`
+
+
