@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-HTPASSWD_FILE="./htpass9"
-USERNAME="consoledeveloper9"
+HTPASSWD_FILE="./htpass"
+USERNAME="consoledeveloper"
 USERPASS="developer"
-HTPASSWD_SECRET="htpasswd9-consoledeveloper-secret"
+HTPASSWD_SECRET="htpasswd-consoledeveloper-secret"
 
 OC_USERS_LIST="$(oc get users)"
 if echo "${OC_USERS_LIST}" | grep -q "${USERNAME}"; then
@@ -23,7 +23,7 @@ metadata:
   name: cluster
 spec:
   identityProviders:
-  - name: consoledeveloper9
+  - name: consoledeveloper
     challenge: true
     login: true
     mappingMethod: claim
