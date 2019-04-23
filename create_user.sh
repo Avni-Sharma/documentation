@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-HTPASSWD_FILE="./htpass"
-USERNAME="consoledeveloper"
+HTPASSWD_FILE="./htpass4"
+USERNAME="consoledeveloper4"
 USERPASS="developer"
-HTPASSWD_SECRET="htpasswd-consoledeveloper-secret"
+HTPASSWD_SECRET="htpasswd4-consoledeveloper-secret"
 
 OC_USERS_LIST="$(oc get users)"
 if echo "${OC_USERS_LIST}" | grep -q "${USERNAME}"; then
-    echo "User consoledeveloper already exists"
+    echo -e "\n\033[0;32m \xE2\x9C\x94 User consoledeveloper already exists \033[0m\n"
     exit;
 fi
 htpasswd -cb $HTPASSWD_FILE $USERNAME $USERPASS
@@ -23,7 +23,7 @@ metadata:
   name: cluster
 spec:
   identityProviders:
-  - name: consoledeveloper
+  - name: consoledeveloper4
     challenge: true
     login: true
     mappingMethod: claim
