@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-HTPASSWD_FILE="./htpass4"
-USERNAME="consoledeveloper4"
+HTPASSWD_FILE="./htpass9"
+USERNAME="consoledeveloper9"
 USERPASS="developer"
-HTPASSWD_SECRET="htpasswd4-consoledeveloper-secret"
+HTPASSWD_SECRET="htpasswd9-consoledeveloper-secret"
 
 OC_USERS_LIST="$(oc get users)"
 if echo "${OC_USERS_LIST}" | grep -q "${USERNAME}"; then
@@ -23,7 +23,7 @@ metadata:
   name: cluster
 spec:
   identityProviders:
-  - name: consoledeveloper4
+  - name: consoledeveloper9
     challenge: true
     login: true
     mappingMethod: claim
@@ -33,4 +33,7 @@ spec:
         name: ${HTPASSWD_SECRET}
 EOF
 
+sleep 10s
 oc create clusterrolebinding ${USERNAME}_role --clusterrole=self-provisioner --user=${USERNAME}
+
+oc login -u ${USERNAME} -p ${USERPASS}

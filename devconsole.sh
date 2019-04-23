@@ -6,9 +6,10 @@ else
    echo -e "Running Openshift Version 4.x \n"
    echo -e "\n Installing DevConsole Operator... \n"
    echo -e "\n Installing Catalog Source... \n"
-   oc apply -f /home/avni/go/src/github.com/redhat-developer/devconsole-operator/test/e2e/catalog_source_OS4.yaml
+   oc apply -f ./yamls/catalog_source_OS4.yaml
    echo -e "\n Waiting for catalog source to get installed before creating subscription \n"
-   sleep 40s
+   sleep 60s
    echo -e "\n Creating Subscription... \n"
-   oc apply -f /home/avni/go/src/github.com/redhat-developer/devconsole-operator/test/e2e/subscription_OS4.yaml
+   oc apply -f ./yamls/subscription_OS4.yaml
+   sleep 5s
 fi
